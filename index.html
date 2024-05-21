@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fibonacci</title>
+    </head>
+
+    <body>
+
+        <script>
+
+            let seriefib= [0, 1];
+            let lim = 10;
+
+            for (let i = 2; i <= lim; i++){
+
+                seriefib.push(seriefib[i-1]+ seriefib[i-2]);
+
+            }
+            
+            document.write(seriefib);
+        </script>
+    </body>
+</html>
