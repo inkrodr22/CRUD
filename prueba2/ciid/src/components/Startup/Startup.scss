@@ -8,3 +8,34 @@
 .p-datatable {
     width: 80%;
 }
+
+.form-container {
+    display: flex;
+    flex-direction: column; /* Alinea los elementos en columna */
+    height: 100%;
+    justify-content: center; /* Centra verticalmente */
+    align-items: stretch; /* Hace que los elementos ocupen todo el ancho del contenedor */
+    padding: 20px; /* Agrega un padding para espacio interno */
+
+    .field {
+        margin-bottom: 8px; /* Espacio entre los campos */
+        width: 100%; /* Asegura que el campo ocupe el 100% del contenedor */
+
+        label {
+            display: block; /* Asegura que el label esté en su propia línea */
+            margin-bottom: 5px; /* Espacio entre el label y el campo */
+            font-weight: bold;
+        }
+
+        input, .p-dropdown, .p-inputtext, .p-inputnumber, .p-calendar{
+            width: 100%; /* Asegura que los inputs ocupen el 100% del ancho */
+        }
+    }
+
+    .footer {
+        text-align: right;
+        .cancel-button {
+            margin-right: 1rem;
+        }
+    }
+}
