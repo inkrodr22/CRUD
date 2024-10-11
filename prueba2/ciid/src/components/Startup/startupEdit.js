@@ -21,7 +21,8 @@ const EditStartupDialog = ({ visible, onHide, onSubmit, startup }) => {
         >
             <StartupForm 
                 initialData={startup} // Aquí pasas los datos de la startup
-                onSubmit={handleSubmit}
+                onSubmit={handleSubmit} 
+                onHide={onHide} // Pasa onHide aquí para que el modal se cierre correctamente
             />
         </Dialog>
     );

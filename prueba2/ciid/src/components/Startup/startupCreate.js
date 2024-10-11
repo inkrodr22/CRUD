@@ -8,7 +8,7 @@ import { Button } from 'primereact/button';
 import { createStartup } from '../../api/startups'; // Asegúrate de tener una función para crear la startup
 import { updateStartup } from '../../api/startups';
 
-const StartupForm = ({ onClose, initialData }) => {
+const StartupForm = ({ onClose, initialData, onHide }) => {
     const [name, setName] = useState('');
     const [foundedDate, setFoundedDate] = useState(null);
     const [location, setLocation] = useState('');
@@ -64,6 +64,7 @@ const StartupForm = ({ onClose, initialData }) => {
                 await createStartup(formData);
                 console.log('Startup created successfully'); // Mensaje de éxito
             }
+            onHide();
         } catch (error) {
             console.error('Error creating or updating startup:', error); // Manejo de errores
         }
