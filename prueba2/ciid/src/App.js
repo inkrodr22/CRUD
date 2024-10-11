@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import Sidebar from './components/Sidebar/Sidebar.js';
 import Inicio from './pages/inicio.js';
 import Startup from './components/Startup/startup.js';
-import Technology from './pages/technology.js';
-import 'primereact/resources/themes/saga-blue/theme.css';  // Elige el tema que prefieras
-import 'primereact/resources/primereact.min.css';          // Estilos base de PrimeReact
-import 'primeicons/primeicons.css';                        // Iconos de PrimeIcons
+import Technology from './components/Technologies/technologies.js';
+import 'primereact/resources/themes/saga-blue/theme.css'; 
+import 'primereact/resources/primereact.min.css';          
+import 'primeicons/primeicons.css';                       
 
 
 function App() {

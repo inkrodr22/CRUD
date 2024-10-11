@@ -2,17 +2,17 @@ import React, { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-import DeleteConfirmation from "./startupDelete";
-import EditStartupDialog from "./startupEdit";
+import DeleteConfirmation from "./technologyDelete";
+import EditStartupDialog from "./technologyEdit";
 
-const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
-  const [startupList, setStartupList] = useState(startups || []);
+const TechnologiesTable = ({ technologies, onDelete, onEditSuccess}) => {
+  const [technologiesList, setTechnologiesList] = useState(technologies || []);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [startupToEdit, setStartupToEdit] = useState(null);
 
   useEffect(() => {
-    setStartupList(startups);
-  }, [startups]);
+    setTechnologiesList(technologies);
+  }, [technologies]);
 
   const actionBodyTemplate = (rowData) => {
     return (
@@ -22,13 +22,13 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
           onClick={() => confirmEdit(rowData)}
           className="p-button-text"
         />
-        <DeleteConfirmation startup={rowData} onDelete={onDelete} />
+        <DeleteConfirmation technology={rowData} onDelete={onDelete} />
       </div>
     );
   };
 
-  const confirmEdit = (startup) => {
-    setStartupToEdit(startup);
+  const confirmEdit = (technology) => {
+    setStartupToEdit(technology);
     setVisibleEdit(true);
   };
 
@@ -39,9 +39,9 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
 
   const handleEditSuccess = (updatedData) => {
     console.log('Datos actualizados recibidos:', updatedData);
-    setStartupList((prevList) =>
-      prevList.map((startup) =>
-        startup._id === updatedData._id ? updatedData : startup
+    setTechnologiesList((prevList) =>
+      prevList.map((technology) =>
+        technology._id === updatedData._id ? updatedData : technology
       )
     );
     onEditSuccess();
@@ -51,15 +51,15 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
   return (
     <div className="table-container">
       <DataTable
-        value={startupList}
+        value={technologiesList}
         paginator
-        header="Lista de Startups"
+        header="Lista de Tecnologías"
         rows={5}
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
         rowsPerPageOptions={[5, 10, 15, 20, 25, 50]}
         dataKey="_id"
-        emptyMessage="No startups encontradas."
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} startups"
+        emptyMessage="No tecnologias encontradas."
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} Tecnologías"
       >
         <Column
           field="name"
@@ -70,11 +70,23 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
           style={{ minWidth: "10rem" }}
         />
         <Column
-          field="foundedDate"
-          header="Fecha de Fundación"
+          field="sector"
+          header="Sector"
+          sortable
+          style={{ minWidth: "10rem" }}
+        />
+        <Column
+          field="adoptionStatus"
+          header="Estado de adopcion "
+          sortable
+          style={{ minWidth: "10rem" }}
+        />
+        <Column
+          field="createdDate"
+          header="Fecha de Creación"
           sortable
           body={(rowData) => {
-            const date = new Date(rowData.foundedDate);
+            const date = new Date(rowData.createdDate);
             return `${date.getDate().toString().padStart(2, "0")}/${(
               date.getMonth() + 1
             )
@@ -84,25 +96,19 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
           style={{ minWidth: "10rem" }}
         />
         <Column
-          field="location"
-          header="Ubicación"
+          field="currentUsage"
+          header="Uso actual"
           sortable
           style={{ minWidth: "10rem" }}
         />
-        <Column
-          field="category"
-          header="Categoria"
-          sortable
-          style={{ minWidth: "10rem" }}
-        />
-        <Column field="investmentReceived" header="Inversión" sortable />
+        <Column field="implementationCost" header="Costo de Implementacion" sortable />
         <Column
           field="description"
           header="Descripción"
           sortable
           style={{ minWidth: "14rem" }}
         />
-        <Column field="employees" header="Empleados" sortable />
+        <Column field="maturityLevel" header="Nivel de madurez" sortable />
         <Column
           header="Acciones"
           headerStyle={{ width: "5rem", textAlign: "center" }}
@@ -112,11 +118,11 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
       <EditStartupDialog
         visible={visibleEdit}
         onHide={hideEditDialog}
-        startup={startupToEdit}
+        technology={startupToEdit}
         onSuccess={handleEditSuccess}
       />
     </div>
   );
 };
 
-export default StartupTable;
+export default TechnologiesTable;

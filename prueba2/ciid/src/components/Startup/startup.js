@@ -72,7 +72,7 @@ const Startup = () => {
           >
             <StartupForm 
               onSuccess={fetchStartups}
-              onHide={() => setVisible(false)}
+              onHide={() => setVisible(false)} // Pasar la función para cerrar el modal
 
             />
           </Dialog>

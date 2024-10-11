@@ -65,7 +65,7 @@ const StartupForm = ({ initialData, onHide, onSuccess }) => {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        onSuccess(formData); // Aquí se pasa el formData actualizado
+        onSuccess(formData);
       } else {
         await createStartup(formData);
         console.log("Startup creada correctamente");
@@ -76,15 +76,14 @@ const StartupForm = ({ initialData, onHide, onSuccess }) => {
           confirmButtonText: 'Aceptar'
         });
         onSuccess();
-        onHide(); // Llama a onSuccess sin datos si es nueva
+        onHide();
       }
     } catch (error) {
-      // Manejar el error específico
       console.error("Error creando o editando la startup:", error);
-      onHide(); // Llama a onSuccess sin datos si es nueva
+      onHide();
 
       
-      // Verificar el mensaje de error o el código de estado
+
       const errorMessage = error.response?.data?.message || 'Hubo un problema al crear o actualizar la startup. Por favor, intenta nuevamente.';
       
       Swal.fire({
@@ -158,16 +157,6 @@ const StartupForm = ({ initialData, onHide, onSuccess }) => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="description">Descripción</label>
-          <InputTextarea
-            id="description"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            required
-          />
-        </div>
-        <div className="form-field">
           <label htmlFor="employees">Número de Empleados</label>
           <InputNumber
             id="employees"
@@ -178,10 +167,21 @@ const StartupForm = ({ initialData, onHide, onSuccess }) => {
             required
           />
         </div>
-        <div className="form-buttons">
-          <Button type="button" label="Cancelar" onClick={onHide} className="p-button-secondary" />
+        <div className="form-field">
+          <label htmlFor="description">Descripción</label>
+          <InputTextarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            rows={3}
+            required
+          />
+        </div>
+        <div className="footer">
+          <Button type="button" label="Cancelar" onClick={onHide} className="cancel-button" />
           <Button 
             type="submit" 
+            className="submit-button"
             label={initialData ? "Actualizar" : "Crear"} 
             disabled={!name || !foundedDate || !location || !selectedCategory || !investmentReceived || !description || employees < 0}
           />
