@@ -1,31 +1,27 @@
-// EditStartupDialog.js
-import React, { useEffect } from 'react';
-import { Dialog } from 'primereact/dialog';
-import StartupForm from './startupCreate';
+import React from "react";
+import { Dialog } from "primereact/dialog";
+import StartupForm from "./startupCreate";
 
 const EditStartupDialog = ({ visible, onHide, onSubmit, startup }) => {
-    useEffect(() => {
-        console.log('Startup a editar en startupEdit:', startup); // Esto debería imprimir cuando el startup cambia
-    }, [startup]);
-    const handleSubmit = (data) => {
-        onSubmit(data);
-        onHide();
-    };
+  const handleSubmit = (data) => {
+    onSubmit(data);
+    onHide();
+  };
 
-    return (
-        <Dialog 
-            header="Editar Startup" 
-            visible={visible} 
-            onHide={onHide}
-            style={{ width: '500px' }} 
-        >
-            <StartupForm 
-                initialData={startup} // Aquí pasas los datos de la startup
-                onSubmit={handleSubmit} 
-                onHide={onHide} // Pasa onHide aquí para que el modal se cierre correctamente
-            />
-        </Dialog>
-    );
+  return (
+    <Dialog
+      header="Editar Startup"
+      visible={visible}
+      onHide={onHide}
+      style={{ width: "500px" }}
+    >
+      <StartupForm
+        initialData={startup}
+        onSubmit={handleSubmit}
+        onHide={onHide}
+      />
+    </Dialog>
+  );
 };
 
 export default EditStartupDialog;
