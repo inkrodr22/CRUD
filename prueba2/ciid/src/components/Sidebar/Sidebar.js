@@ -1,23 +1,32 @@
-import { NavLink } from "react-router-dom"
-import * as FaIcons from 'react-icons/fa'
+import { NavLink } from "react-router-dom";
+import * as FaIcons from 'react-icons/fa';
+import { List } from 'primereact/listbox';
+import './Sidebar.scss';
 
- 
 const Sidebar = () => {
+    const items = [
+        { label: 'Inicio', icon: <FaIcons.FaHome className="me-2" />, path: '/' },
+        { label: 'Startup', icon: <FaIcons.FaRocket className="me-2" />, path: '/startup' },
+        { label: 'Technology', icon: <FaIcons.FaRegLightbulb className="me-2" />, path: '/technology' },
+    ];
+
     return (
-        <div className="sidebar bg-light">
+        <div className="sidebar">
             <ul>
-                <li>
-                    <NavLink to="/" className="text-dark rounded py-2 w-100 d-inline-block px-3" activeClassName="active"><FaIcons.FaHome className="me-2"/>Inicio</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/startup" className="text-dark rounded py-2 w-100 d-inline-block px-3" activeClassName="active"><FaIcons.FaRocket className="me-2"/>Startup</NavLink>
-                </li>
-                <li>
-                    <NavLink to="/technology" className="text-dark rounded py-2 w-100 d-inline-block px-3" activeClassName="active"><FaIcons.FaRegLightbulb className="me-2"/>Technology</NavLink>
-                </li>
+                {items.map((item, index) => (
+                    <li key={index}>
+                        <NavLink 
+                            to={item.path} 
+                            className="text-indigo-500 rounded py-2 w-100 d-inline-block px-3" 
+                            activeClassName="active"
+                        >
+                            {item.icon} {item.label}
+                        </NavLink>
+                    </li>
+                ))}
             </ul>
         </div>
-    )
-}
+    );
+};
 
-export default Sidebar
+export default Sidebar;

@@ -5,7 +5,6 @@ import Sidebar from './components/Sidebar/Sidebar.js';
 import Inicio from './pages/inicio.js';
 import Startup from './components/Startup/startup.js';
 import Technology from './pages/technology.js';
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 import 'primereact/resources/themes/saga-blue/theme.css';  // Elige el tema que prefieras
 import 'primereact/resources/primereact.min.css';          // Estilos base de PrimeReact
 import 'primeicons/primeicons.css';                        // Iconos de PrimeIcons
@@ -14,11 +13,11 @@ import 'primeicons/primeicons.css';                        // Iconos de PrimeIco
 function App() {
   return (
     <Router>
-      <Navbar />
+    
       <div className='flex'>
         <Sidebar />
         <div className='content'>
-          <Routes>
+        <Routes>
             <Route path='/inicio' exact={true} Component={Inicio}/>
             <Route path='/startup' exact={true} Component={Startup}/>
             <Route path='/technology' exact={true} Component={Technology}/>

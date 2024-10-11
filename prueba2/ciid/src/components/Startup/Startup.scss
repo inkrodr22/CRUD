@@ -1,41 +1,57 @@
-.table-container {
+/* Estilos para el contenedor general de la página de Startups */
+.startup-container {
+    padding: 2%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+/* Encabezado de la página */
+.startup-header {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    height: 100vh;
+    margin-bottom: 20px;
 }
 
-.p-datatable {
-    width: 80%;
-}
-
-.form-container {
+/* Información de la startup, imagen y texto */
+.startup-info {
     display: flex;
-    flex-direction: column; /* Alinea los elementos en columna */
-    height: 100%;
-    justify-content: center; /* Centra verticalmente */
-    align-items: stretch; /* Hace que los elementos ocupen todo el ancho del contenedor */
-    padding: 20px; /* Agrega un padding para espacio interno */
-
-    .field {
-        margin-bottom: 8px; /* Espacio entre los campos */
-        width: 100%; /* Asegura que el campo ocupe el 100% del contenedor */
-
-        label {
-            display: block; /* Asegura que el label esté en su propia línea */
-            margin-bottom: 5px; /* Espacio entre el label y el campo */
-            font-weight: bold;
-        }
-
-        input, .p-dropdown, .p-inputtext, .p-inputnumber, .p-calendar{
-            width: 100%; /* Asegura que los inputs ocupen el 100% del ancho */
-        }
-    }
-
-    .footer {
-        text-align: right;
-        .cancel-button {
-            margin-right: 1rem;
-        }
-    }
+    align-items: center;
 }
+
+/* Estilo para la imagen del logo o ilustración de la startup */
+.startup-logo {
+    width: 150px;
+    height: 150px;
+    margin-right: 20px;
+}
+
+/* Descripción de la startup */
+.startup-description {
+    max-width: 800px;
+}
+
+/* Botón para crear una startup, alineado a la derecha */
+.create-startup-button {
+    align-self: flex-start;
+    background-color: var(--indigo-500);
+    border-color: var(--indigo-500);
+}
+
+/* Sección para la tabla de startups */
+.startup-table-section {
+    margin-top: 10px;
+    flex-grow: 0; /* Permite que la tabla ocupe el espacio restante */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Asegura que la tabla esté alineada al fondo de la pantalla */
+}
+
+
+/* Estilos adicionales que ya tenías para otros elementos */
+
+/* Diálogo del formulario de creación de startups */
+.Modal {
+    width: 500px;
+}
+

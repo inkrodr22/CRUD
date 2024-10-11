@@ -1,0 +1,37 @@
+.sidebar {
+    background-color: #ffffff;
+    width: 16rem;
+    height: calc(100vh);
+    flex-shrink: 0; // Evita que el sidebar se reduzca
+
+    ul {
+        list-style: none;
+        padding: 1rem 2rem;
+        margin-top: 1.5rem; // Añadir margen superior equivalente
+
+        li {
+            margin-bottom: 1rem;
+
+            a {
+                display: inline-block; // Asegúrate de que el enlace se comporte como un bloque
+                text-decoration: none;
+                color: var(--gray-800); // Color normal para los enlaces
+                height: 40px;
+                width: 100%;
+                padding: 0.5rem 2rem; // Ajusta el padding para aumentar el área
+                border-radius: 5px; // Aplica border-radius para que el fondo sea redondeado
+                transition: background-color 0.3s ease, transform 0.3s ease; // Transiciones suaves
+            
+                &:hover {
+                    color: var(--indigo-500);
+                    background-color: var(--gray-200);
+                }
+            
+                &.active {
+                    background-color: var(--indigo-100); // Fondo para el enlace activo
+                    color: var(--indigo-500); // Color del texto activo
+                }
+            }
+        }
+    }
+}
