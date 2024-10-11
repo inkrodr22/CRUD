@@ -3,7 +3,10 @@ import { Dialog } from "primereact/dialog";
 import StartupForm from "./startupCreate";
 
 const EditStartupDialog = ({ visible, onHide, startup, onSuccess }) => {
-
+  const handleSuccess = (updatedData) => {
+    onSuccess(updatedData);
+    onHide();
+  };
   
 
   return (
@@ -15,8 +18,7 @@ const EditStartupDialog = ({ visible, onHide, startup, onSuccess }) => {
     >
       <StartupForm
         initialData={startup}
-        onHide={onHide}
-        onSuccess={onSuccess}
+        onSuccess={handleSuccess}
       />
     </Dialog>
   );

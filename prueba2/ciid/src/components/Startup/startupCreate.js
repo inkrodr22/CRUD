@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 import { createStartup, updateStartup } from "../../api/startups";
 import Swal from 'sweetalert2';
 
-const StartupForm = ({ onClose, initialData, onHide, onSuccess }) => {
+const StartupForm = ({ initialData, onHide, onSuccess }) => {
   const [name, setName] = useState("");
   const [foundedDate, setFoundedDate] = useState(null);
   const [location, setLocation] = useState("");
@@ -66,7 +66,6 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess }) => {
           confirmButtonText: 'Aceptar'
         });
         onSuccess(formData); // Aquí se pasa el formData actualizado
-        onHide();
       } else {
         await createStartup(formData);
         console.log("Startup creada correctamente");
@@ -76,13 +75,21 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess }) => {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
-        onSuccess(); // Llama a onSuccess sin datos si es nueva
+        onSuccess();
+        onHide(); // Llama a onSuccess sin datos si es nueva
       }
     } catch (error) {
+      // Manejar el error específico
       console.error("Error creando o editando la startup:", error);
+      onHide(); // Llama a onSuccess sin datos si es nueva
+
+      
+      // Verificar el mensaje de error o el código de estado
+      const errorMessage = error.response?.data?.message || 'Hubo un problema al crear o actualizar la startup. Por favor, intenta nuevamente.';
+      
       Swal.fire({
         title: 'Error!',
-        text: 'Hubo un problema al crear o actualizar la startup.',
+        text: errorMessage,
         icon: 'error',
         confirmButtonText: 'Aceptar'
       });

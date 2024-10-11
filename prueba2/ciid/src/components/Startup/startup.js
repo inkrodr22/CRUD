@@ -72,6 +72,8 @@ const Startup = () => {
           >
             <StartupForm 
               onSuccess={fetchStartups}
+              onHide={() => setVisible(false)}
+
             />
           </Dialog>
 
@@ -82,6 +84,7 @@ const Startup = () => {
                 selectedStartups={selectedStartups}
                 setSelectedStartups={setSelectedStartups}
                 onDelete={onDelete}
+                onEditSuccess={fetchStartups} 
               />
             </section>
           </div>

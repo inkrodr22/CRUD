@@ -5,7 +5,7 @@ import { Button } from "primereact/button";
 import DeleteConfirmation from "./startupDelete";
 import EditStartupDialog from "./startupEdit";
 
-const StartupTable = ({ startups, onDelete }) => {
+const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
   const [startupList, setStartupList] = useState(startups || []);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [startupToEdit, setStartupToEdit] = useState(null);
@@ -38,11 +38,13 @@ const StartupTable = ({ startups, onDelete }) => {
   };
 
   const handleEditSuccess = (updatedData) => {
+    console.log('Datos actualizados recibidos:', updatedData); // Verifica lo que recibes
     setStartupList((prevList) =>
       prevList.map((startup) =>
         startup._id === updatedData._id ? updatedData : startup
       )
     );
+    onEditSuccess(); // Llama a la función de éxito para refrescar la lista
     hideEditDialog();
   };
 
