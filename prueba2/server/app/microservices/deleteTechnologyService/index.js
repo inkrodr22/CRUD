@@ -2,7 +2,6 @@ const express = require('express');
 const Technology = require('../createTechnologyService/model');
 const router = express.Router();
 
-// Eliminar una tecnología
 router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
 

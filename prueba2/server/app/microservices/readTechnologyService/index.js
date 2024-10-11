@@ -2,7 +2,6 @@ const express = require('express');
 const Technology = require('../createTechnologyService/model');
 const router = express.Router();
 
-// Obtener la lista de tecnologías
 router.get('/read', async (req, res) => {
   try {
     const technologies = await Technology.find();
@@ -12,7 +11,6 @@ router.get('/read', async (req, res) => {
   }
 });
 
-// Obtener tecnología por ID
 router.get('/read/:id', async (req, res) => {
   const { id } = req.params;
 

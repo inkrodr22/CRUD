@@ -2,7 +2,6 @@ const express = require('express');
 const Startup = require('../createStartupService/model');
 const router = express.Router();
 
-// Actualizar una startup
 router.put('/update/:id', async (req, res) => {
   const { id } = req.params;
   const updates = req.body;

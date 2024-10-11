@@ -2,7 +2,6 @@ const express = require('express');
 const Startup = require('../createStartupService/model');
 const router = express.Router();
 
-// Eliminar una startup
 router.delete('/delete/:id', async (req, res) => {
   const { id } = req.params;
 
