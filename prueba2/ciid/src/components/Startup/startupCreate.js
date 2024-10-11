@@ -5,10 +5,10 @@ import { Calendar } from "primereact/calendar";
 import { InputNumber } from "primereact/inputnumber";
 import { InputTextarea } from "primereact/inputtextarea";
 import { Button } from "primereact/button";
-import { createStartup } from "../../api/startups"; // Asegúrate de tener una función para crear la startup
-import { updateStartup } from "../../api/startups";
+import { createStartup, updateStartup } from "../../api/startups";
+import Swal from 'sweetalert2';
 
-const StartupForm = ({ onClose, initialData, onHide }) => {
+const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
   const [name, setName] = useState("");
   const [foundedDate, setFoundedDate] = useState(null);
   const [location, setLocation] = useState("");
@@ -29,7 +29,6 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
   );
 
   useEffect(() => {
-    console.log("Startup a editar en startupcreate:", initialData);
     if (initialData) {
       setName(initialData.name);
       setFoundedDate(new Date(initialData.foundedDate));
@@ -56,24 +55,44 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
     };
 
     try {
-      if (initialData) {
-        const id = initialData._id;
-        await updateStartup(id, formData);
-        console.log("Actualizar la startup:", formData);
+        if (initialData) {
+            const id = initialData._id;
+            await updateStartup(id, formData);
+            console.log("Actualizar la startup:", formData);
+            Swal.fire({
+              title: 'Éxito!',
+              text: 'La startup ha sido actualizada correctamente.',
+              icon: 'success',
+              confirmButtonText: 'Aceptar'
+            });
+            onHide();
       } else {
         await createStartup(formData);
-        console.log("Startup created successfully");
+        console.log("Startup creada correctamente");
+        Swal.fire({
+          title: 'Éxito!',
+          text: 'La startup ha sido creada correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
       }
-      onHide();
+
+      onSuccess();
     } catch (error) {
-      console.error("Error creating or updating startup:", error);
+        console.error("Error creando o editando la startup:", error);
+        Swal.fire({
+          title: 'Error!',
+          text: 'Hubo un problema al crear o actualizar la startup.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
     }
   };
 
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="name">Nombre</label>
           <InputText
             id="name"
@@ -81,9 +100,10 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             onChange={(e) => setName(e.target.value)}
             placeholder="Ingresa el nombre"
             required
+            disabled={!!initialData}
           />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="foundedDate">Fecha de Fundación</label>
           <Calendar
             id="foundedDate"
@@ -93,9 +113,10 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             placeholder="Selecciona la fecha"
             showIcon
             required
-          />
+            disabled={!!initialData}
+            />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="location">Ubicación</label>
           <InputText
             id="location"
@@ -105,7 +126,7 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             required
           />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="category">Categoría</label>
           <Dropdown
             id="category"
@@ -117,7 +138,7 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             required
           />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="investmentReceived">Inversión Recibida</label>
           <InputNumber
             inputId="investmentReceived"
@@ -127,9 +148,10 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             currency="USD"
             locale="en-US"
             required
+            min={0}
           />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="employees">Número de Empleados</label>
           <InputNumber
             inputId="employees"
@@ -139,7 +161,7 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             required
           />
         </div>
-        <div className="field">
+        <div className="form-field">
           <label htmlFor="description">Descripción</label>
           <InputTextarea
             value={description}
@@ -160,7 +182,7 @@ const StartupForm = ({ onClose, initialData, onHide }) => {
             label="Enviar"
             icon="pi pi-check"
             onClick={onClose}
-            type="submit"
+            className="submit-button"
           />
         </div>
       </form>

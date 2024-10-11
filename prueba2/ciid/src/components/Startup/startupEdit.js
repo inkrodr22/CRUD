@@ -16,9 +16,10 @@ const EditStartupDialog = ({ visible, onHide, onSubmit, startup }) => {
       style={{ width: "500px" }}
     >
       <StartupForm
-        initialData={startup}
+        initialData={startup} // Aquí pasas los datos de la startup
         onSubmit={handleSubmit}
-        onHide={onHide}
+        onHide={onHide} 
+        onSuccess={fetchStartups} // Pasa onHide aquí para que el modal se cierre correctamente
       />
     </Dialog>
   );

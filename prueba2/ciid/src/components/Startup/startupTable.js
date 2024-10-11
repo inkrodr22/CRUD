@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Button } from "primereact/button";
-import DeleteConfirmationDialog from "./startupDelete";
+import DeleteConfirmation from "./startupDelete";
 import EditStartupDialog from "./startupEdit";
 
 const StartupTable = ({ startups, onEdit, onDelete }) => {
-  const [visibleDelete, setVisibleDelete] = useState(false);
+  const [startupList, setStartupList] = useState(startups || []); 
   const [visibleEdit, setVisibleEdit] = useState(false);
-  const [startupToDelete, setStartupToDelete] = useState(null);
   const [startupToEdit, setStartupToEdit] = useState(null);
+
+  useEffect(() => {
+    setStartupList(startups);
+  }, [startups]);
+
 
   const actionBodyTemplate = (rowData) => {
     return (
@@ -19,30 +23,14 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
           onClick={() => confirmEdit(rowData)}
           className="p-button-text"
         />
-        <Button
-          icon="pi pi-trash"
-          onClick={() => confirmDelete(rowData)}
-          className="p-button-text p-button-danger"
-          style={{ marginLeft: "0.5rem" }}
-        />
+        <DeleteConfirmation startup={rowData} onDelete={onDelete} />
       </div>
     );
   };
 
   const confirmEdit = (startup) => {
     setStartupToEdit(startup);
-    console.log("Startup a editar:", startup);
     setVisibleEdit(true);
-  };
-
-  const confirmDelete = (startup) => {
-    setStartupToDelete(startup);
-    setVisibleDelete(true);
-  };
-
-  const hideDeleteDialog = () => {
-    setVisibleDelete(false);
-    setStartupToDelete(null);
   };
 
   const hideEditDialog = () => {
@@ -50,13 +38,14 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
     setStartupToEdit(null);
   };
 
-  const handleDelete = (id) => {
-    onDelete(id);
-    hideDeleteDialog();
-  };
-
   const handleEditSubmit = (updatedData) => {
     console.log("Datos a actualizar:", updatedData);
+    // Actualiza el estado local con la startup editada
+    setStartupList((prevList) =>
+      prevList.map((startup) =>
+        startup._id === updatedData._id ? updatedData : startup
+      )
+    );
     onEdit(updatedData);
     hideEditDialog();
   };
@@ -65,12 +54,12 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
     <div className="table-container">
       {" "}
       <DataTable
-        value={startups}
+        value={startupList}
         paginator
-        header="Startups List"
-        rows={10}
+        header="Lista de Startups"
+        rows={5}
         paginatorTemplate="FirstPageLink PrevPageLink PageLinks NextPageLink LastPageLink CurrentPageReport RowsPerPageDropdown"
-        rowsPerPageOptions={[10, 25, 50]}
+        rowsPerPageOptions={[5, 10, 15, 20, 25, 50]}
         dataKey="_id"
         emptyMessage="No startups found."
         currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
@@ -123,12 +112,6 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
           body={actionBodyTemplate}
         />
       </DataTable>
-      <DeleteConfirmationDialog
-        visible={visibleDelete}
-        onHide={hideDeleteDialog}
-        onDeleteConfirm={handleDelete}
-        startup={startupToDelete}
-      />
       <EditStartupDialog
         visible={visibleEdit}
         onHide={hideEditDialog}

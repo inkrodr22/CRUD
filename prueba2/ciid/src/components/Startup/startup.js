@@ -5,7 +5,7 @@ import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import StartupForm from "./startupCreate";
 import StartupTable from "./startupTable";
-import logo from "../../img/5400_6_07.jpg";
+import logo from "../../img/startup.jpg";
 import { getStartups, deleteStartup } from "../../api/startups";
 
 const Startup = () => {
@@ -14,17 +14,17 @@ const Startup = () => {
   const [selectedStartups, setSelectedStartups] = useState([]);
 
   useEffect(() => {
-    const fetchStartups = async () => {
-      try {
-        const data = await getStartups();
-        setStartups(data);
-      } catch (error) {
-        console.error("Error fetching startups:", error);
-      }
-    };
-
     fetchStartups();
   }, []);
+
+  const fetchStartups = async () => {
+    try {
+      const data = await getStartups();
+      setStartups(data);
+    } catch (error) {
+      console.error("Error al obtener las startups:", error);
+    }
+  };
 
   const onDelete = async (id) => {
     try {
@@ -37,30 +37,24 @@ const Startup = () => {
     }
   };
 
-  const handleEdit = (startup) => {
-  };
-
   return (
     <div className="startup-container">
-      <Card
-        style={{ width: "100%", backgroundColor: "white", minHeight: "90vh" }}
-        className="shadow-2"
-      >
-        <div className="p-4 md:p-6">
-          <header className="startup-header">
-            <div className="startup-info">
-              <img src={logo} alt="Startup Logo" className="startup-logo" />
-              <div>
-                <h1>Startup</h1>
-                <p className="startup-description">
-                  Una startup es una empresa emergente que busca desarrollar un
-                  producto o servicio innovador y escalable, generalmente en el
-                  ámbito tecnológico. Estas empresas suelen estar en sus
-                  primeras etapas de desarrollo y buscan financiamiento para
-                  crecer rápidamente en un mercado competitivo.
-                </p>
-              </div>
-            </div>
+        <Card className="card-custom shadow-2"> 
+            <div className="p-4 md:p-6">
+            <header className="startup-header">
+                <div className="startup-info">
+                <img src={logo} alt="Startup Logo" className="startup-logo" />
+                <div>
+                    <h1>Startup</h1>
+                    <p className="startup-description">
+                    Una startup es una empresa emergente que busca desarrollar un
+                    producto o servicio innovador y escalable, generalmente en el
+                    ámbito tecnológico. Estas empresas suelen estar en sus
+                    primeras etapas de desarrollo y buscan financiamiento para
+                    crecer rápidamente en un mercado competitivo.
+                    </p>
+                </div>
+                </div>
 
             <Button
               label="Crear Startup"
@@ -76,16 +70,21 @@ const Startup = () => {
             style={{ width: "500px" }}
             onHide={() => setVisible(false)}
           >
-            <StartupForm onClose={() => setVisible(false)} />
+            <StartupForm 
+              onClose={() => {
+                setVisible(false);
+                fetchStartups(); // Vuelve a cargar startups después de cerrar el formulario
+              }} 
+              onSuccess={fetchStartups} // Llama a fetchStartups después de una creación exitosa
+            />
           </Dialog>
 
-          <div className="tabla">
+          <div>
             <section className="startup-table-section">
               <StartupTable
                 startups={startups}
                 selectedStartups={selectedStartups}
                 setSelectedStartups={setSelectedStartups}
-                onEdit={handleEdit}
                 onDelete={onDelete}
               />
             </section>

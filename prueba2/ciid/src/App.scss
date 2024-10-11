@@ -3,9 +3,10 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   font-family:Arial, Helvetica, sans-serif; /* Estilo global de tipografía */
-  background-color: #f3f2f2; /* Fondo general */
+  background-color: #F8F9FA; /* Fondo general */
   color: #333; /* Color del texto */
   height: 100%;
+  
 }
 
 
@@ -25,10 +26,10 @@ html, body {
 /* El contenido debe calcular su altura dinámicamente */
 .content {
   flex-grow: 1;
-  padding: 20px;
   box-sizing: border-box;
   height: calc(100vh); /* Resta la altura del navbar de la altura total */
-  overflow-y: auto; /* Permite scroll en caso de que el contenido sea muy grande */
+  overflow-y: auto;
+   /* Permite scroll en caso de que el contenido sea muy grande */
 }
 
 footer {
