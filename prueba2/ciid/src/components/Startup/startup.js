@@ -1,4 +1,4 @@
-import "./Startup.scss";
+import "./startup.scss";
 import { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Dialog } from "primereact/dialog";
@@ -71,11 +71,7 @@ const Startup = () => {
             onHide={() => setVisible(false)}
           >
             <StartupForm 
-              onClose={() => {
-                setVisible(false);
-                fetchStartups(); // Vuelve a cargar startups después de cerrar el formulario
-              }} 
-              onSuccess={fetchStartups} // Llama a fetchStartups después de una creación exitosa
+              onSuccess={fetchStartups}
             />
           </Dialog>
 

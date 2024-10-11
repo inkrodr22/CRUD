@@ -2,11 +2,9 @@ import React from "react";
 import { Dialog } from "primereact/dialog";
 import StartupForm from "./startupCreate";
 
-const EditStartupDialog = ({ visible, onHide, onSubmit, startup }) => {
-  const handleSubmit = (data) => {
-    onSubmit(data);
-    onHide();
-  };
+const EditStartupDialog = ({ visible, onHide, startup, onSuccess }) => {
+
+  
 
   return (
     <Dialog
@@ -16,13 +14,13 @@ const EditStartupDialog = ({ visible, onHide, onSubmit, startup }) => {
       style={{ width: "500px" }}
     >
       <StartupForm
-        initialData={startup} // Aquí pasas los datos de la startup
-        onSubmit={handleSubmit}
-        onHide={onHide} 
-        onSuccess={fetchStartups} // Pasa onHide aquí para que el modal se cierre correctamente
+        initialData={startup}
+        onHide={onHide}
+        onSuccess={onSuccess}
       />
     </Dialog>
   );
 };
 
 export default EditStartupDialog;
+

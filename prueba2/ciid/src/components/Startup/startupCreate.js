@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 import { createStartup, updateStartup } from "../../api/startups";
 import Swal from 'sweetalert2';
 
-const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
+const StartupForm = ({ onClose, initialData, onHide, onSuccess }) => {
   const [name, setName] = useState("");
   const [foundedDate, setFoundedDate] = useState(null);
   const [location, setLocation] = useState("");
@@ -55,17 +55,18 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
     };
 
     try {
-        if (initialData) {
-            const id = initialData._id;
-            await updateStartup(id, formData);
-            console.log("Actualizar la startup:", formData);
-            Swal.fire({
-              title: 'Éxito!',
-              text: 'La startup ha sido actualizada correctamente.',
-              icon: 'success',
-              confirmButtonText: 'Aceptar'
-            });
-            onHide();
+      if (initialData) {
+        const id = initialData._id;
+        await updateStartup(id, formData);
+        console.log("Actualizar la startup:", formData);
+        Swal.fire({
+          title: 'Éxito!',
+          text: 'La startup ha sido actualizada correctamente.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        onSuccess(formData); // Aquí se pasa el formData actualizado
+        onHide();
       } else {
         await createStartup(formData);
         console.log("Startup creada correctamente");
@@ -75,17 +76,16 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
           icon: 'success',
           confirmButtonText: 'Aceptar'
         });
+        onSuccess(); // Llama a onSuccess sin datos si es nueva
       }
-
-      onSuccess();
     } catch (error) {
-        console.error("Error creando o editando la startup:", error);
-        Swal.fire({
-          title: 'Error!',
-          text: 'Hubo un problema al crear o actualizar la startup.',
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-        });
+      console.error("Error creando o editando la startup:", error);
+      Swal.fire({
+        title: 'Error!',
+        text: 'Hubo un problema al crear o actualizar la startup.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
     }
   };
 
@@ -114,7 +114,7 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
             showIcon
             required
             disabled={!!initialData}
-            />
+          />
         </div>
         <div className="form-field">
           <label htmlFor="location">Ubicación</label>
@@ -141,48 +141,42 @@ const StartupForm = ({ onClose, initialData, onHide, onSuccess}) => {
         <div className="form-field">
           <label htmlFor="investmentReceived">Inversión Recibida</label>
           <InputNumber
-            inputId="investmentReceived"
+            id="investmentReceived"
             value={investmentReceived}
             onValueChange={(e) => setInvestmentReceived(e.value)}
             mode="currency"
             currency="USD"
-            locale="en-US"
-            required
-            min={0}
-          />
-        </div>
-        <div className="form-field">
-          <label htmlFor="employees">Número de Empleados</label>
-          <InputNumber
-            inputId="employees"
-            value={employees}
-            onValueChange={(e) => setEmployees(e.value)}
-            min={0}
+            placeholder="0.00"
             required
           />
         </div>
         <div className="form-field">
           <label htmlFor="description">Descripción</label>
           <InputTextarea
+            id="description"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             rows={3}
-            cols={30}
             required
           />
         </div>
-        <div className="footer">
-          <Button
-            label="Cancelar"
-            icon="pi pi-times"
-            onClick={onClose}
-            className="cancel-button"
+        <div className="form-field">
+          <label htmlFor="employees">Número de Empleados</label>
+          <InputNumber
+            id="employees"
+            value={employees}
+            onValueChange={(e) => setEmployees(e.value)}
+            min={0}
+            placeholder="0"
+            required
           />
-          <Button
-            label="Enviar"
-            icon="pi pi-check"
-            onClick={onClose}
-            className="submit-button"
+        </div>
+        <div className="form-buttons">
+          <Button type="button" label="Cancelar" onClick={onHide} className="p-button-secondary" />
+          <Button 
+            type="submit" 
+            label={initialData ? "Actualizar" : "Crear"} 
+            disabled={!name || !foundedDate || !location || !selectedCategory || !investmentReceived || !description || employees < 0}
           />
         </div>
       </form>

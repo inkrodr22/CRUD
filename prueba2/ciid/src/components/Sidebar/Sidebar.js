@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import * as FaIcons from 'react-icons/fa';
-import { List } from 'primereact/listbox';
 import './Sidebar.scss';
 
 const Sidebar = () => {
@@ -17,8 +16,9 @@ const Sidebar = () => {
                     <li key={index}>
                         <NavLink 
                             to={item.path} 
-                            className="text-indigo-500 rounded py-2 w-100 d-inline-block px-3" 
-                            activeClassName="active"
+                            className={({ isActive }) => 
+                                `text-indigo-500 rounded py-2 w-100 d-inline-block px-3 ${isActive ? 'active' : ''}`
+                            }
                         >
                             {item.icon} {item.label}
                         </NavLink>

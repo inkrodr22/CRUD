@@ -5,15 +5,14 @@ import { Button } from "primereact/button";
 import DeleteConfirmation from "./startupDelete";
 import EditStartupDialog from "./startupEdit";
 
-const StartupTable = ({ startups, onEdit, onDelete }) => {
-  const [startupList, setStartupList] = useState(startups || []); 
+const StartupTable = ({ startups, onDelete }) => {
+  const [startupList, setStartupList] = useState(startups || []);
   const [visibleEdit, setVisibleEdit] = useState(false);
   const [startupToEdit, setStartupToEdit] = useState(null);
 
   useEffect(() => {
     setStartupList(startups);
   }, [startups]);
-
 
   const actionBodyTemplate = (rowData) => {
     return (
@@ -38,21 +37,17 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
     setStartupToEdit(null);
   };
 
-  const handleEditSubmit = (updatedData) => {
-    console.log("Datos a actualizar:", updatedData);
-    // Actualiza el estado local con la startup editada
+  const handleEditSuccess = (updatedData) => {
     setStartupList((prevList) =>
       prevList.map((startup) =>
         startup._id === updatedData._id ? updatedData : startup
       )
     );
-    onEdit(updatedData);
     hideEditDialog();
   };
 
   return (
     <div className="table-container">
-      {" "}
       <DataTable
         value={startupList}
         paginator
@@ -115,8 +110,8 @@ const StartupTable = ({ startups, onEdit, onDelete }) => {
       <EditStartupDialog
         visible={visibleEdit}
         onHide={hideEditDialog}
-        onSubmit={handleEditSubmit}
         startup={startupToEdit}
+        onSuccess={handleEditSuccess}
       />
     </div>
   );

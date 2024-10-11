@@ -13,10 +13,14 @@ const DeleteConfirmation = ({ startup, onDelete }) => {
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar',
       reverseButtons: true
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        onDelete(startup._id);
-        Swal.fire('Eliminado!', 'La startup ha sido eliminada.', 'success');
+        try {
+          await onDelete(startup._id);
+          Swal.fire('Eliminado!', 'La startup ha sido eliminada.', 'success');
+        } catch (error) {
+          Swal.fire('Error!', 'No se pudo eliminar la startup.', 'error');
+        }
       }
     });
   };

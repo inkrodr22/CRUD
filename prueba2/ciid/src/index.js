@@ -4,7 +4,6 @@ import App from './App';
 import 'primereact/resources/themes/saga-blue/theme.css';  // Elige el tema que prefieras
 import 'primereact/resources/primereact.min.css';          // Estilos base de PrimeReact
 import 'primeicons/primeicons.css';                        // Iconos de PrimeIcons
-import { PrimeReactProvider, PrimeReactContext } from 'primereact/api';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
