@@ -4,6 +4,7 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import DeleteConfirmation from "./technologyDelete";
 import EditStartupDialog from "./technologyEdit";
+import { Link } from 'react-router-dom';
 
 const TechnologiesTable = ({ technologies, onDelete, onEditSuccess}) => {
   const [technologiesList, setTechnologiesList] = useState(technologies || []);
@@ -68,6 +69,11 @@ const TechnologiesTable = ({ technologies, onDelete, onEditSuccess}) => {
           filter
           filterPlaceholder="Search by name"
           style={{ minWidth: "10rem" }}
+          body={(rowData) => {
+            return (
+              <Link to={`/technology/${rowData._id}`}>{rowData.name}</Link>
+            );
+          }}
         />
         <Column
           field="sector"

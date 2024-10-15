@@ -4,6 +4,8 @@ import { Column } from "primereact/column";
 import { Button } from "primereact/button";
 import DeleteConfirmation from "./startupDelete";
 import EditStartupDialog from "./startupEdit";
+import { Link } from 'react-router-dom';
+
 
 const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
   const [startupList, setStartupList] = useState(startups || []);
@@ -68,7 +70,12 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
           filter
           filterPlaceholder="Search by name"
           style={{ minWidth: "10rem" }}
-        />
+          body={(rowData) => {
+            return (
+              <Link to={`/startup/${rowData._id}`}>{rowData.name}</Link>
+            );
+          }}
+            />
         <Column
           field="foundedDate"
           header="Fecha de Fundación"
@@ -111,7 +118,7 @@ const StartupTable = ({ startups, onDelete, onEditSuccess}) => {
       </DataTable>
       <EditStartupDialog
         visible={visibleEdit}
-        onHide={hideEditDialog}
+        onHide={() => setVisibleEdit(false)}
         startup={startupToEdit}
         onSuccess={handleEditSuccess}
       />

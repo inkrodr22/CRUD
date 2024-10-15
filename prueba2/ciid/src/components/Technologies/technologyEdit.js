@@ -18,6 +18,7 @@ const EditStartupDialog = ({ visible, onHide, technology, onSuccess }) => {
       <TechnologiesForm
         initialData={technology}
         onSuccess={handleSuccess}
+        onHide={onHide}
       />
     </Dialog>
   );

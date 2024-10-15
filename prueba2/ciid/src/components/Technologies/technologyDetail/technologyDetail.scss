@@ -1,0 +1,76 @@
+.technology-detail-container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 20px auto; /* Centrar el contenedor */
+    padding: 20px;
+}
+
+.technology-card {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    margin-bottom: 20px; /* Espacio entre las tarjetas */
+}
+
+.technology-header-card {
+    display: flex;
+    align-items: center; /* Centrar verticalmente */
+}
+
+.logo-img {
+    width: 100px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantener la relación de aspecto */
+    margin-right: 15px; /* Espaciado entre el logo y el título */
+}
+
+.technology-name-container {
+    display: flex;
+    flex-direction: column; /* Apilar el label y el nombre verticalmente */
+}
+
+.technology-name-label {
+    font-size: 2rem; /* Tamaño del texto 'Nombre' */
+    color: #333; /* Color del texto 'Nombre' */
+    margin: 0; /* Eliminar margen predeterminado */
+}
+
+.technology-name {
+    font-size: 2rem; /* Tamaño del nombre de la tecnología */
+    color: #3F51B5; /* Color del nombre de la tecnología */
+    margin: 0; /* Eliminar margen predeterminado */
+    margin-top: 10px; /* Eliminar margen predeterminado */
+    margin-left: 40px;
+}
+
+.back-button {
+    padding: 10px 20px; /* Espaciado interno del botón */
+    font-size: 1rem; /* Tamaño de la fuente */
+    color: white; /* Color del texto del botón */
+    background-color: #3F51B5; /* Color de fondo del botón */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Efecto de transición */
+    margin-left: auto; /* Empujar el botón a la derecha */
+}
+
+.back-button:hover {
+    background-color: #5c6bc0; /* Color de fondo al pasar el ratón */
+}
+
+.separator {
+    border: none; /* Eliminar el borde predeterminado */
+    height: 2px; /* Espesor de la línea */
+    background-color: #ccc; /* Color de la línea */
+    margin: 15px 0; /* Margen superior e inferior */
+}
+
+.technology-info-card {
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+.technology-description {
+    display: flex;
+    flex-direction: column; /* Apilar detalles verticalmente */
+}

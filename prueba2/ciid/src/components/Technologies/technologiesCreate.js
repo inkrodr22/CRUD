@@ -34,6 +34,7 @@ const TechnologiesForm = ({ initialData, onHide, onSuccess }) => {
       setName(initialData.name);
       setcreatedDate(new Date(initialData.createdDate));
       setadoptionStatus(initialData.adoptionStatus);
+      setCurrentUsage(initialData.currentUsage);
       setSector(
         sectors.find((cat) => cat.code === initialData.sector)
       );

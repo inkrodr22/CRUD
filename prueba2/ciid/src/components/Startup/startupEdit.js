@@ -19,6 +19,7 @@ const EditStartupDialog = ({ visible, onHide, startup, onSuccess }) => {
       <StartupForm
         initialData={startup}
         onSuccess={handleSuccess}
+        onHide={onHide}
       />
     </Dialog>
   );
