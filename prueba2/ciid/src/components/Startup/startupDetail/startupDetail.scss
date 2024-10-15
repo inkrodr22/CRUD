@@ -1,6 +1,6 @@
 .startup-detail-container {
-    max-width: 800px; /* Ancho máximo del contenedor */
-    margin: 20px auto; /* Centrar el contenedor */
+    max-width: 800px;
+    margin: 20px auto;
     padding: 20px;
 }
 
@@ -10,7 +10,7 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     background-color: #ffffff;
-    margin-bottom: 20px; /* Espacio entre las tarjetas */
+    margin-bottom: 20px;
 }
 
 .startup-header-card {
@@ -19,61 +19,61 @@
 }
 
 .logo-img {
-    width: 100px; /* Ajusta el tamaño del logo */
-    height: auto; /* Mantener la relación de aspecto */
+    width: 100px;
+    height: auto;
     margin-top: 20px;
-    margin-left: 20px; /* Espaciado entre el logo y el título */
+    margin-left: 20px;
 }
 
 .startup-name-container {
     display: flex;
-    flex-direction: column; /* Apilar el label y el nombre verticalmente */
+    flex-direction: column;
 }
 
 .startup-name-label {
-    font-size: 2rem; /* Tamaño del texto 'Nombre' */
-    color: #333; /* Color del texto 'Nombre' */
+    font-size: 2rem;
+    color: #333;
     margin: 0;
-    text-align: left; /* Eliminar margen predeterminado */
+    text-align: left;
 }
 
 .startup-name {
-    font-size: 2rem; /* Tamaño del nombre de la startup */
-    color: #3F51B5; /* Color del nombre de la startup */
+    font-size: 2rem;
+    color: #3F51B5;
     margin: 0;
-    margin-top: 10px; /* Eliminar margen predeterminado */
+    margin-top: 10px;
     margin-left: 40px;
 }
 
 .back-button {
-    padding: 10px 20px; /* Espaciado interno del botón */
-    font-size: 1rem; /* Tamaño de la fuente */
+    padding: 10px 20px;
+    font-size: 1rem;
     color: white;
-    margin-right: 20px; /* Color del texto del botón */
-    background-color: #3F51B5; /* Color de fondo del botón */
-    border: none; /* Sin borde */
-    border-radius: 5px; /* Bordes redondeados */
-    cursor: pointer; /* Cambiar cursor al pasar el ratón */
-    transition: background-color 0.3s; /* Efecto de transición */
+    margin-right: 20px;
+    background-color: #3F51B5;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     margin-left: auto;
 }
 
 .back-button:hover {
-    background-color: #5c6bc0; /* Color de fondo al pasar el ratón */
+    background-color: #5c6bc0;
 }
 
 .separator {
-    border: none; /* Eliminar el borde predeterminado */
-    height: 2px; /* Espesor de la línea */
-    background-color: #ccc; /* Color de la línea */
-    margin: 15px 0; /* Margen superior e inferior */
+    border: none;
+    height: 2px;
+    background-color: #ccc;
+    margin: 15px 0;
 }
 
 .startup-info-card {
-    text-align: center; /* Alinear texto a la izquierda */
+    text-align: center;
 }
 
 .startup-description {
     display: flex;
-    flex-direction: column; /* Apilar detalles verticalmente */
+    flex-direction: column;
 }

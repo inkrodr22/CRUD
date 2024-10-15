@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Importar useNavigate
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './technologyDetail.scss'; // Asegúrate de importar tu archivo CSS
+import './technologyDetail.scss';
 import logo from "../../../img/technologies.png";
 
 const TechnologyDetail = () => {
-    const { id } = useParams(); // Obtener el id de la URL
+    const { id } = useParams();
     const [technology, setTechnology] = useState(null);
-    const navigate = useNavigate(); // Hook para navegar
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchTechnologyDetail = async () => {
@@ -26,7 +26,6 @@ const TechnologyDetail = () => {
 
     return (
         <div className="technology-detail-container">
-            {/* Tarjeta para el logo y el nombre de la tecnología */}
             <div className="technology-header-card technology-card">
                 <div className="technology-logo">
                     <img src={logo} alt="Technology Logo" className="logo-img" />
@@ -37,14 +36,13 @@ const TechnologyDetail = () => {
                 </div>
                 <button 
                     className="back-button" 
-                    onClick={() => navigate('/technology')} // Navegar a la ruta /technologies
+                    onClick={() => navigate('/technology')}
                 >
                     Regresar
                 </button>
             </div>
             <hr className="separator" />
 
-            {/* Tarjeta para la información detallada de la tecnología */}
             <div className="technology-info-card technology-card">
                 <h2>Información de la Tecnología</h2>
                 <div className="technology-description">
